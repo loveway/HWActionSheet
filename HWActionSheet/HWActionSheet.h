@@ -27,8 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HWActionSheet : UIView
 
 @property (nonatomic, copy) void(^tapIndexBlock)(NSInteger index);
-@property (nonatomic, assign) BOOL firstBtnSelected;
-@property (nonatomic, assign) BOOL secondtBtnSelected;
+@property (nonatomic, copy) NSString *actionTitle;
+@property (nonatomic, assign) NSInteger selectedIndex;
 
 - (instancetype)initWithTitles:(NSArray<NSString *> *)titles type:(HWActionSheetType)type;
 - (void)show;

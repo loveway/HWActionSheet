@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="o9p-7d-BOV"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vqj-xO-Cob"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wGX-3d-Ppq">
+                                <rect key="frame" x="141.5" y="90" width="92" height="30"/>
+                                <state key="normal" title="noCancel"/>
+                                <connections>
+                                    <action selector="noCancelClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l3D-GP-KRZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROZ-J3-5Mn">
+                                <rect key="frame" x="253.5" y="90" width="91.5" height="30"/>
+                                <state key="normal" title="titleClose"/>
+                                <connections>
+                                    <action selector="titleCloseClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HUG-R5-jVa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRw-6V-9tW">
+                                <rect key="frame" x="30" y="90" width="91.5" height="30"/>
+                                <state key="normal" title="normal"/>
+                                <connections>
+                                    <action selector="normalClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KCs-iW-u6L"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jRw-6V-9tW" firstAttribute="width" secondItem="ROZ-J3-5Mn" secondAttribute="width" id="06g-F4-iuw"/>
+                            <constraint firstItem="jRw-6V-9tW" firstAttribute="height" secondItem="wGX-3d-Ppq" secondAttribute="height" id="3w4-zL-HVe"/>
+                            <constraint firstItem="jRw-6V-9tW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="88U-rW-nnG"/>
+                            <constraint firstItem="ROZ-J3-5Mn" firstAttribute="leading" secondItem="wGX-3d-Ppq" secondAttribute="trailing" constant="20" id="NQR-JN-QxD"/>
+                            <constraint firstItem="jRw-6V-9tW" firstAttribute="height" secondItem="ROZ-J3-5Mn" secondAttribute="height" id="QIh-vH-xiY"/>
+                            <constraint firstItem="jRw-6V-9tW" firstAttribute="width" secondItem="wGX-3d-Ppq" secondAttribute="width" id="abL-QZ-QGw"/>
+                            <constraint firstItem="jRw-6V-9tW" firstAttribute="centerY" secondItem="wGX-3d-Ppq" secondAttribute="centerY" id="fct-Bv-Ftf"/>
+                            <constraint firstItem="jRw-6V-9tW" firstAttribute="top" secondItem="o9p-7d-BOV" secondAttribute="bottom" constant="70" id="mhN-XK-dHn"/>
+                            <constraint firstItem="wGX-3d-Ppq" firstAttribute="leading" secondItem="jRw-6V-9tW" secondAttribute="trailing" constant="20" id="s9d-EL-Vhq"/>
+                            <constraint firstItem="ROZ-J3-5Mn" firstAttribute="centerY" secondItem="jRw-6V-9tW" secondAttribute="centerY" id="sAg-27-LpM"/>
+                            <constraint firstAttribute="trailing" secondItem="ROZ-J3-5Mn" secondAttribute="trailing" constant="30" id="twI-Qo-jMR"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

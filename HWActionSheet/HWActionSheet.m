@@ -19,17 +19,26 @@
 // 高亮状态下的图片
 #define highImage [self createImageWithColor:GCColor(242, 242, 242)]
 
+//judge iPhone X
+#define is_iPhone  (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define is_iOS11   ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.f)
+#define is_iPhoneX (is_iOS11 && is_iPhone && [self isiphoneX])
+#define KBottomSafe_height  (is_iPhoneX ? 34 : 0)
+
 @interface HWActionSheet ()
 
 @property (nonatomic, strong) UIView *sheetView;
 @property (nonatomic, assign) NSInteger tagIndex;
 @property (nonatomic, assign) HWActionSheetType type;
+@property (nonatomic, strong) UIButton *tempBtn;
+
 
 @end
 
-const CGFloat cellHeight = 45.0f;
-const CGFloat titleHeight = 56.0f;
-const CGFloat margin = 5.0f;
+static const CGFloat cellHeight = 45.0f;
+static const CGFloat titleHeight = 56.0f;
+static const CGFloat margin = 5.0f;
+static const CGFloat separateHeight = 5.0f;
 
 @implementation HWActionSheet
 
@@ -65,21 +74,17 @@ const CGFloat margin = 5.0f;
         }
     }
     CGRect sheetViewFrame = _sheetView.frame;
-    if (_type == HWActionSheettTypeNormal) {
-        sheetViewFrame.size.height = cellHeight * (_tagIndex + 1) + margin + KBottomSafe_height;
+    if (_type == HWActionSheetTypeNormal) {
+        sheetViewFrame.size.height = cellHeight * (_tagIndex + 1) + margin + KBottomSafe_height + separateHeight;
     } else if (_type == HWActionSheetTypeBottomNoCancel) {
         sheetViewFrame.size.height = cellHeight * _tagIndex  + KBottomSafe_height;
-    } else if (_type == HWActionSheetTitleClose) {
+    } else if (_type == HWActionSheetTypeTitleClose) {
         sheetViewFrame.size.height = cellHeight * _tagIndex + titleHeight + KBottomSafe_height;
     }
     _sheetView.frame = sheetViewFrame;
     
     if (_type == HWActionSheetTypeNormal) {
         [self addCancelBtn];
-    } else if (_type == HWActionSheetTypeBottomNoCancel) {
-
-    } else if (_type == HWActionSheetTypeNormal) {
-        [self addTitleView];
     }
 }
 
@@ -128,7 +133,7 @@ const CGFloat margin = 5.0f;
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setBackgroundImage:normalImage forState:UIControlStateNormal];
     [btn setBackgroundImage:highImage forState:UIControlStateHighlighted];
-    [btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:17];
     btn.tag = _tagIndex + 1;
     [btn addTarget:self action:@selector(cellBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -144,21 +149,37 @@ const CGFloat margin = 5.0f;
 
 - (void)cellBtnClick:(UIButton *)btn {
     
+    if (_tempBtn) {
+        [_tempBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
+        _tempBtn = btn;
+    }
     self.tapIndexBlock ? self.tapIndexBlock(btn.tag) : nil;
     [self close];
 }
 
 - (void)addCancelBtn {
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, _sheetView.frame.size.height - cellHeight - KBottomSafe_height - separateHeight, _sheetView.frame.size.width, separateHeight)];
+    lineView.backgroundColor = GlobelSeparatorColor;
+    [self.sheetView addSubview:lineView];
+    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, _sheetView.frame.size.height - cellHeight - KBottomSafe_height, _sheetView.frame.size.width, cellHeight);
     [btn setTitle:@"取消" forState:UIControlStateNormal];
     [btn setBackgroundImage:normalImage forState:UIControlStateNormal];
     [btn setBackgroundImage:highImage forState:UIControlStateHighlighted];
-    [btn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:UIControlStateNormal];
-    btn.titleLabel.font = titleFont(17);
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btn.titleLabel.font = titleFont(15);
     btn.tag = 0;
     [btn addTarget:self action:@selector(cancelBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [self.sheetView addSubview:btn];
+}
+
+- (void)setActionTitle:(NSString *)actionTitle {
+    _actionTitle = actionTitle;
+    if (actionTitle && _type == HWActionSheetTypeTitleClose) {
+        [self addTitleView];
+    }
 }
 
 - (void)addTitleView {
@@ -172,8 +193,8 @@ const CGFloat margin = 5.0f;
     [view addSubview:closeBtn];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    label.text = @"请选择";
     label.font = titleFont(14);
+    label.text = _actionTitle;
     [label sizeToFit];
     label.center = view.center;
     [view addSubview:label];
@@ -192,30 +213,24 @@ const CGFloat margin = 5.0f;
     return theImage;
 }
 
-- (void)setFirstBtnSelected:(BOOL)firstBtnSelected {
-    if (firstBtnSelected) {
-        [self _setSelectedBtnWithTag:1];
+- (void)setSelectedIndex:(NSInteger)selectedIndex {
+    if (selectedIndex == 0) {
+        return;
+    }
+    UIButton *btn = (UIButton *)[self.sheetView viewWithTag:1];
+    if (btn) {
+        [btn setTitleColor:[UIColor cyanColor] forState:UIControlStateNormal];
+        _tempBtn = btn;
     }
 }
 
-- (void)setSecondtBtnSelected:(BOOL)secondtBtnSelected {
-    if (secondtBtnSelected) {
-        [self _setSelectedBtnWithTag:2];
+- (BOOL)isiphoneX {
+    // iPhone X/XS:      375pt * 812pt (@3x)
+    // iPhone XS MAX:    414pt * 896pt (@3x)
+    // iPhone XR:        414pt * 896pt (@2x)
+    if ([UIScreen mainScreen].bounds.size.height == 812.0 || [UIScreen mainScreen].bounds.size.height == 896.0) {
+        return YES;
     }
-}
-
-- (void)_setSelectedBtnWithTag:(NSInteger)btnTag {
-    UIButton *btn1 = (UIButton *)[self.sheetView viewWithTag:1];
-    UIButton *btn2 = (UIButton *)[self.sheetView viewWithTag:2];
-    
-    if (btn1 && btn2) {
-        if (btnTag == 1) {
-            [btn1 setTitleColor:kMain_color forState:UIControlStateNormal];
-            [btn2 setTitleColor:UIColorHex(#333333) forState:UIControlStateNormal];
-        } else {
-            [btn2 setTitleColor:kMain_color forState:UIControlStateNormal];
-            [btn1 setTitleColor:UIColorHex(#333333) forState:UIControlStateNormal];
-        }
-    }
+    return NO;
 }
 @end
