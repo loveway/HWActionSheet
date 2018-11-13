@@ -7,6 +7,6 @@ s.license      = 'MIT'
 s.authors      = {'HenryCheng' => 'clearloveway@gmail.com'}
 s.platform     = :ios, '8.0'
 s.source       = {:git => 'https://github.com/loveway/HWActionSheet.git', :tag => s.version}
-s.source_files = 'Classes/*.{h,m}'
+s.source_files = 'HWActionSheet/*.{h,m}'
 s.requires_arc = true
 end
