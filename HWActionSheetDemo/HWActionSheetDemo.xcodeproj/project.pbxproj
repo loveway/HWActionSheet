@@ -13,7 +13,7 @@
 		218AD3E6219979550022ACBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 218AD3E5219979550022ACBA /* Assets.xcassets */; };
 		218AD3E9219979550022ACBA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 218AD3E7219979550022ACBA /* LaunchScreen.storyboard */; };
 		218AD3EC219979550022ACBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AD3EB219979550022ACBA /* main.m */; };
-		218AD3F521997A2B0022ACBA /* HWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AD3F421997A2B0022ACBA /* HWActionSheet.m */; };
+		218AD3FB219A765E0022ACBA /* HWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AD3FA219A765E0022ACBA /* HWActionSheet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +27,8 @@
 		218AD3E8219979550022ACBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		218AD3EA219979550022ACBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		218AD3EB219979550022ACBA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		218AD3F321997A2B0022ACBA /* HWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWActionSheet.h; sourceTree = "<group>"; };
-		218AD3F421997A2B0022ACBA /* HWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWActionSheet.m; sourceTree = "<group>"; };
+		218AD3F9219A765E0022ACBA /* HWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWActionSheet.h; sourceTree = "<group>"; };
+		218AD3FA219A765E0022ACBA /* HWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWActionSheet.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +45,7 @@
 		218AD3D0219979530022ACBA = {
 			isa = PBXGroup;
 			children = (
-				218AD3F221997A2B0022ACBA /* HWActionSheet */,
+				218AD3F8219A765E0022ACBA /* HWActionSheet */,
 				218AD3DB219979530022ACBA /* HWActionSheetDemo */,
 				218AD3DA219979530022ACBA /* Products */,
 			);
@@ -75,14 +75,13 @@
 			path = HWActionSheetDemo;
 			sourceTree = "<group>";
 		};
-		218AD3F221997A2B0022ACBA /* HWActionSheet */ = {
+		218AD3F8219A765E0022ACBA /* HWActionSheet */ = {
 			isa = PBXGroup;
 			children = (
-				218AD3F321997A2B0022ACBA /* HWActionSheet.h */,
-				218AD3F421997A2B0022ACBA /* HWActionSheet.m */,
+				218AD3F9219A765E0022ACBA /* HWActionSheet.h */,
+				218AD3FA219A765E0022ACBA /* HWActionSheet.m */,
 			);
-			name = HWActionSheet;
-			path = ../HWActionSheet;
+			path = HWActionSheet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,7 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				218AD3F521997A2B0022ACBA /* HWActionSheet.m in Sources */,
+				218AD3FB219A765E0022ACBA /* HWActionSheet.m in Sources */,
 				218AD3E1219979530022ACBA /* ViewController.m in Sources */,
 				218AD3EC219979550022ACBA /* main.m in Sources */,
 				218AD3DE219979530022ACBA /* AppDelegate.m in Sources */,
