@@ -34,11 +34,11 @@
     [sheet setTapIndexBlock:^(NSInteger index) {
         
     }];
-    
+
     [sheet show];
 }
 - (IBAction)titleCloseClick:(id)sender {
-    HWActionSheet *sheet = [[HWActionSheet alloc] initWithTitles:@[@"按钮一", @"按钮二"]                                                            type:HWActionSheetTypeTitleClose];
+    HWActionSheet *sheet = [[HWActionSheet alloc] initWithTitles:@[@"按钮一", @"按钮二", @"按钮三", @"按钮四", @"按钮五", @"按钮六", @"按钮七"]                                                            type:HWActionSheetTypeTitleClose];
     [sheet setTapIndexBlock:^(NSInteger index) {
         
     }];
